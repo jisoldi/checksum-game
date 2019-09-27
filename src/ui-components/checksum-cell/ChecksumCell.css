@@ -1,0 +1,36 @@
+.checksum-cell {
+  display: inline-block;
+  margin: 5px;
+  transition: height linear 0.5s, width linear 0.5s;
+}
+
+.checksum-cell.is-row {
+  height: 10vh;
+  width: 1vh;
+}
+
+.checksum-cell.is-column {
+  height: 1vh;
+  width: 10vh;
+}
+
+.checksum-cell.expanded {
+  height: 10vh;
+  width: 10vh;
+}
+
+.checksum-cell.is-row.shrunken {
+  width: 0;
+}
+
+.checksum-cell.is-column.shrunken {
+  height: 0;
+}
+
+.style1 {
+  background: black;
+}
+
+.style2 {
+  background: #673ab7a3;
+}

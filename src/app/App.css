@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-panel {
+  flex: 0 0 auto;
+  margin: 10px;
+}
+
+.matrix-panel {
+  flex: 1 0 auto;
+
+  text-align: center;
+}
+
+button {
+  margin-left: 5px;
+}

@@ -1,0 +1,14 @@
+.cell {
+  height: 10vh;
+  width: 10vh;
+  display: inline-block;
+  margin: 5px;
+}
+
+.style1 {
+  background: yellow;
+}
+
+.style2 {
+  background: #673ab7a3;
+}

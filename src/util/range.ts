@@ -1,0 +1,1 @@
+export const createRange = (length: number): number[] => [...Array(length).keys()]
