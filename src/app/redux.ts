@@ -63,10 +63,29 @@ const calcColumnsChecksumValues = (matrix: MatrixValues, size: number): boolean[
   return array
 }
 
+const blockSelectedReq = (row:number,column:number) => {
+  fetch("http://localhost:3000/blockSelected",{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({row,column}) // body data type must match "Content-Type" header
+  });
+
+}
+
+const resetReq = () => {
+  fetch("http://localhost:3000/reset");
+}
+
 export const reducer = createReducer<State, Action>(InitialState)
   .handleAction(Actions.toggleCell, (state, action) => {
     const { row, column } = action.payload
     const newMatrixValues = { ...state.matrixValues, [cellKey(row, column)]: !Selectors.getValue(row, column)(state) }
+
+    if(state.freezeChecksum){
+      blockSelectedReq(row,column);
+    }
 
     return {
       ...state,
@@ -76,6 +95,7 @@ export const reducer = createReducer<State, Action>(InitialState)
     }
   })
   .handleAction(Actions.changeSize, (state, action) => {
+    resetReq();
     return {
       ...state,
       size: action.payload.size,
@@ -93,7 +113,10 @@ export const reducer = createReducer<State, Action>(InitialState)
   })
   .handleAction(Actions.freeze, state => ({...state, freezeChecksum: true}))
   .handleAction(Actions.toggleExpand, state => ({...state, expanded: !state.expanded}))
-  .handleAction(Actions.reset, () => InitialState)
+  .handleAction(Actions.reset, () => {
+    resetReq();
+    return  InitialState
+  })
 
 export const Selectors = {
   getValue: (row: number, column: number) => (state: State) => !!state.matrixValues[cellKey(row, column)],
