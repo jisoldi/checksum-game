@@ -13,13 +13,14 @@ export type EventProps = {
   onFreezeToggle: () => void
   onExpandToggle: () => void
   onReset: () => void
+  onRandomClick: () => void
 }
 
 export type Props = ValueProps & EventProps
 
 export class App extends React.PureComponent<Props> {
   render(): ReactNode {
-    const { size, onReset, isFrozen, expanded, onFreezeToggle, onExpandToggle } = this.props
+    const { size, onReset, isFrozen, expanded, onFreezeToggle, onExpandToggle, onRandomClick } = this.props
 
     return (
       <div className="app">
@@ -31,10 +32,13 @@ export class App extends React.PureComponent<Props> {
             <option value={5}>5x5</option>
             <option value={6}>6x6</option>
             <option value={7}>7x7</option>
+            <option value={15}>15x15</option>
+            <option value={100}>100x100</option>
           </select>
           <button onClick={onFreezeToggle}>{isFrozen ? 'Stop' : 'Start'}</button>
           <button onClick={onReset}>Reset</button>
           <button onClick={onExpandToggle}>{expanded ? 'Shrink' : 'Expand'}</button>
+          <button onClick={onRandomClick}>Randomize</button>
         </div>
         <div className="matrix-panel">
           <MatrixContainer/>

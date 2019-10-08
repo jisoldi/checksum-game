@@ -13,7 +13,8 @@ const mapDispatch = (dispatch: Dispatch): EventProps => ({
   onFreezeToggle: () => dispatch(Actions.toggleFreeze()),
   onExpandToggle: () => dispatch(Actions.toggleExpand()),
   onReset: () => dispatch(Actions.reset()),
-  onSizeChange: size => dispatch(Actions.changeSize(size))
+  onSizeChange: size => dispatch(Actions.changeSize(size)),
+  onRandomClick: () => {dispatch(Actions.randomize())}
 })
 
 export const AppContainer = connect(mapState, mapDispatch)(App)

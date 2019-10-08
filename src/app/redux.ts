@@ -11,6 +11,7 @@ export const Actions = {
   toggleFreeze: createAction('Checksum/Matrix/ToggleFreeze'),
   toggleExpand: createAction('Checksum/Matrix/ToggleExpand'),
   reset: createAction('Checksum/Matrix/Reset'),
+  randomize: createAction('Checksum/Matrix/Randomize')
 }
 
 export type Action = ActionType<typeof Actions>
@@ -117,6 +118,24 @@ export const reducer = createReducer<State, Action>(InitialState)
     resetReq();
     return  InitialState
   })
+    .handleAction(Actions.randomize, (state,action) => {
+      let newState = {...state};
+      let newMatrix = {... newState.matrixValues};
+
+      for(let i = 0 ; i < state.size ; i++){
+        for(let j = 0 ; j < state.size ; j++){
+          newMatrix[cellKey(i,j)] = Math.random() > 0.5 ? true : false
+        }
+      }
+      newState = {... newState, matrixValues: newMatrix}
+      console.log(newState);
+      newState = {
+        ... newState,
+        rowsChecksumValues: state.freezeChecksum ? state.rowsChecksumValues : calcRowsChecksumValues(newMatrix, state.size),
+        columnsChecksumValues: state.freezeChecksum ? state.columnsChecksumValues : calcColumnsChecksumValues(newMatrix, state.size),
+      }
+      return newState;
+    })
 
 export const Selectors = {
   getValue: (row: number, column: number) => (state: State) => !!state.matrixValues[cellKey(row, column)],

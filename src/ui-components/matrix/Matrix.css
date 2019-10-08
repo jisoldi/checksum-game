@@ -5,6 +5,7 @@
 .matrix .row {
   display: block;
   text-align: left;
+  white-space: nowrap;
 }
 
 .matrix .row:first-child::before, .matrix .row:last-child::before {
