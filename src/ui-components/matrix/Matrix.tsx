@@ -35,7 +35,7 @@ export class Matrix extends React.PureComponent<Props, State> {
         {range.map(row => (
           <div className={rowClassName} key={row}>
             <ChecksumCellComponent isRow={true} index={row} shrunken={expandChecksum}/>
-            {range.map(column => (<CellComponent key={cellKey(row, column)} row={row} column={column}/>))}
+            {range.map(column => (<CellComponent  key={cellKey(row, column)} row={row} column={column}/>))}
             <ChecksumCellComponent isRow={true} index={row} expanded={expandChecksum}/>
           </div>
         ))}

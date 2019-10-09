@@ -24,7 +24,7 @@ let init =  () => {
             alert("CONNECT")
             const ip = $("#ip").val();
             if(ip){
-                socket = io.connect(ip);
+                socket = io.connect("http://"+ip+":3000");
             }else{
                 socket = io.connect("localhost:3000");
             }
@@ -38,9 +38,11 @@ let init =  () => {
 
 let initSocket = () => {
     socket.on("blockSelected" , (block) => {
-
+        block.column ++;
+        block.row ++;
         $("#latestRequests").append(
-          "<div class='request w3-cell-row w3-theme-action w3-border'> <p>Columna : "+block.column +" , Fila : "+ block.row + "</p></div>"
+          "<div class='request w3-cell-row w3-theme-action w3-" +
+          "border'> <p>Columna : "+String.fromCharCode(96 + block.column ).toUpperCase() +" , Fila : "+ block.row + "</p></div>"
         );
 
     })

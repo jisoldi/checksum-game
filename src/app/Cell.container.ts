@@ -8,6 +8,8 @@ export type OwnProps = CellComponentProps
 
 const mapState = (state: State, ownProps: OwnProps): ValueProps => ({
   value: Selectors.getValue(ownProps.row, ownProps.column)(state),
+  row: ownProps.row,
+  column: ownProps.column
 })
 
 const mapDispatch = (dispatch: Dispatch, ownProps: OwnProps): EventProps => ({
